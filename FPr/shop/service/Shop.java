@@ -2,6 +2,8 @@ package FPr.shop.service;
 
 import FPr.shop.model.*;
 
+import com.shop.model.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,10 @@ public class Shop {
 
     public void addProduct(Product product) {
         products.add(product);
+    }
+
+    public void removeProduct(Product product) {
+        products.remove(product);
     }
 
     public void placeOrder(Order order) {

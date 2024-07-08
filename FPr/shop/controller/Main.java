@@ -1,7 +1,7 @@
 package FPr.shop.controller;
 
-import FPr.shop.model.Customer;
-import FPr.shop.model.User;
+import FPr.shop.model.*;
+
 import FPr.shop.service.Shop;
 
 import java.util.Scanner;
@@ -14,13 +14,15 @@ public class Main {
         while (true) {
             System.out.println("1. Register");
             System.out.println("2. Login");
-            System.out.println("3. Exit");
+            System.out.println("3. Add Product");
+            System.out.println("4. Remove Product");
+            System.out.println("5. Exit");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine(); // consume newline
 
             switch (choice) {
-                case 1 -> {
+                case 1:
                     System.out.println("Enter username:");
                     String username = scanner.nextLine();
                     System.out.println("Enter password:");
@@ -35,9 +37,9 @@ public class Main {
                     Customer customer = new Customer(username, password, email, address, phoneNumber);
                     shop.addUser(customer);
                     System.out.println("Registration successful!");
-                }
+                    break;
 
-                case 2 -> {
+                case 2:
                     System.out.println("Enter username:");
                     String loginUsername = scanner.nextLine();
                     System.out.println("Enter password:");
@@ -46,14 +48,52 @@ public class Main {
                     User user = shop.getUserService().authenticate(loginUsername, loginPassword);
                     if (user != null) {
                         System.out.println("Login successful! Welcome " + user.getUsername());
+                        // پس از ورود به سیستم، می‌توانید امکانات بیشتری را برای کاربر فعال کنید
                     } else {
                         System.out.println("Invalid username or password. Please try again.");
                     }
-                }
+                    break;
 
-                case 3 -> System.exit(0);
+                case 3:
+                    System.out.println("Enter product name:");
+                    String productName = scanner.nextLine();
+                    System.out.println("Enter product price:");
+                    double productPrice = scanner.nextDouble();
+                    System.out.println("Enter product quantity:");
+                    int productQuantity = scanner.nextInt();
+                    scanner.nextLine(); 
+                    System.out.println("Enter product category:");
+                    String productCategory = scanner.nextLine();
 
-                default -> System.out.println("Invalid choice, please try again.");
+                    Product product = new Product(productName, productPrice, productQuantity, productCategory);
+                    shop.addProduct(product);
+                    System.out.println("Product added successfully!");
+                    break;
+
+                case 4:
+                    System.out.println("Enter product name to remove:");
+                    String removeProductName = scanner.nextLine();
+                    Product removeProduct = null;
+                    for (Product prod : shop.getProducts()) {
+                        if (prod.getName().equals(removeProductName)) {
+                            removeProduct = prod;
+                            break;
+                        }
+                    }
+                    if (removeProduct != null) {
+                        shop.removeProduct(removeProduct);
+                        System.out.println("Product removed successfully!");
+                    } else {
+                        System.out.println("Product not found.");
+                    }
+                    break;
+
+                case 5:
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Invalid choice, please try again.");
             }
         }
     }
