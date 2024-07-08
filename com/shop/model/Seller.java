@@ -1,3 +1,8 @@
+package com.shop.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Seller extends User {
     private List<Product> products;
 

@@ -1,3 +1,7 @@
+package com.shop.controller;
+
+import com.shop.model.*;
+import com.shop.service.*;
 import java.util.Scanner;
 
 public class Main {
@@ -14,7 +18,7 @@ public class Main {
             scanner.nextLine(); // consume newline
 
             switch (choice) {
-                case 1:
+                case 1 -> {
                     System.out.println("Enter username:");
                     String username = scanner.nextLine();
                     System.out.println("Enter password:");
@@ -29,18 +33,26 @@ public class Main {
                     Customer customer = new Customer(username, password, email, address, phoneNumber);
                     shop.addUser(customer);
                     System.out.println("Registration successful!");
-                    break;
+                }
 
-                case 2:
-                    // فرآیند ورود به سیستم
-                    break;
+                case 2 -> {
+                    System.out.println("Enter username:");
+                    String loginUsername = scanner.nextLine();
+                    System.out.println("Enter password:");
+                    String loginPassword = scanner.nextLine();
 
-                case 3:
-                    System.exit(0);
-                    break;
+                    User user = shop.getUserService().authenticate(loginUsername, loginPassword);
+                    if (user != null) {
+                        System.out.println("Login successful! Welcome " + user.getUsername());
+                        // پس از ورود به سیستم، می‌توانید امکانات بیشتری را برای کاربر فعال کنید
+                    } else {
+                        System.out.println("Invalid username or password. Please try again.");
+                    }
+                }
 
-                default:
-                    System.out.println("Invalid choice, please try again.");
+                case 3 -> System.exit(0);
+
+                default -> System.out.println("Invalid choice, please try again.");
             }
         }
     }
