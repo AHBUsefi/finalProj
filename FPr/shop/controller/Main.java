@@ -1,7 +1,9 @@
-package com.shop.controller;
+package FPr.shop.controller;
 
-import com.shop.model.*;
-import com.shop.service.*;
+import FPr.shop.model.Customer;
+import FPr.shop.model.User;
+import FPr.shop.service.Shop;
+
 import java.util.Scanner;
 
 public class Main {
@@ -15,7 +17,7 @@ public class Main {
             System.out.println("3. Exit");
 
             int choice = scanner.nextInt();
-            scanner.nextLine(); // consume newline
+            scanner.nextLine(); 
 
             switch (choice) {
                 case 1 -> {
@@ -44,7 +46,6 @@ public class Main {
                     User user = shop.getUserService().authenticate(loginUsername, loginPassword);
                     if (user != null) {
                         System.out.println("Login successful! Welcome " + user.getUsername());
-                        // پس از ورود به سیستم، می‌توانید امکانات بیشتری را برای کاربر فعال کنید
                     } else {
                         System.out.println("Invalid username or password. Please try again.");
                     }

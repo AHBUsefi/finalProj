@@ -1,4 +1,4 @@
-package com.shop.model;
+package FPr.shop.model;
 
 public abstract class User {
     protected String username;
@@ -23,5 +23,4 @@ public abstract class User {
         return password;
     }
 
-    // متدهای مشترک بین همه کاربران
 }

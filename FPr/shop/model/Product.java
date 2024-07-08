@@ -1,4 +1,4 @@
-package com.shop.model;
+package FPr.shop.model;
 
 public class Product {
     private String name;

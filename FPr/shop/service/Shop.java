@@ -1,6 +1,6 @@
-package com.shop.service;
+package FPr.shop.service;
 
-import com.shop.model.*;
+import FPr.shop.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
